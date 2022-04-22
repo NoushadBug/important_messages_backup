@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Dainty – Material Theme Ocean",
+    "workbench.iconTheme": "file-icons-mac"
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#1b778b80",
+        "editorCursor.foreground": "#bdfdfa",
+        "editor.selectionHighlightBackground": "#135564",
+    }
+  "trailing-spaces.backgroundColor": "#2c808350",
+}
