@@ -15,6 +15,25 @@ var styles = `
       padding: 5px;
     }
 
+    input[type="text"]{
+      border: 1.82px solid #6b91cb;
+      border-radius: 4px;
+      padding: 5px;
+    }
+
+    ::placeholder {
+      color: darkturquoise;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: darkturquoise;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: darkturquoise;
+    }
+
     .noselect {
       -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
@@ -26,7 +45,9 @@ var styles = `
     }
 `;
 
-document.querySelectorAll("._2ph_._a6-h._a6-i").forEach((item) => (item.classList.add("noselect")));
+document
+  .querySelectorAll("._2ph_._a6-h._a6-i")
+  .forEach((item) => item.classList.add("noselect"));
 document
   .querySelectorAll("._a72d")
   .forEach((item) => item.classList.add("noselect"));
@@ -68,6 +89,18 @@ a2.classList.add("_2s25");
 a2.classList.add("_cy7");
 a2.onclick = toggleDateFilter;
 menuList.appendChild(a2);
+
+//add search input button
+let inp = document.createElement("input");
+inp.setAttribute("type", "text");
+inp.setAttribute("id", "searchInput");
+inp.setAttribute("placeholder", "Search");
+inp.classList.add("_2s25");
+inp.classList.add("_cy7");
+menuList.appendChild(inp);
+
+var searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", searchMessage, false);
 
 function showSuccess(el) {
   let originalContent = el.innerHTML;
@@ -162,4 +195,25 @@ function filterByDate() {
     }
   }
   showSuccess(dateFilterButton);
+}
+
+function searchMessage(evt) {
+  // console.info(this.value);
+  // console.info(evt.target.value);
+
+  let searchText = this.value;
+  let i = messageDiv.childNodes.length;
+
+  let searchArray = searchText.trim().split(" ");
+  let re = new RegExp(searchArray.join("|"), "i");
+
+  while (i--) {
+    if (messageDiv.childNodes[i].querySelectorAll("._a72d").length != 0) {
+      if (re.test(messageDiv.childNodes[i].innerHTML)) {
+        messageDiv.childNodes[i].style.display = "block";
+      } else {
+        messageDiv.childNodes[i].style.display = "none";
+      }
+    }
+  }
 }
